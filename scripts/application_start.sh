@@ -11,4 +11,4 @@ pkill node >> /home/ec2-user/app/deploy.log 2>&1 || echo 'No node process found'
 echo 'starting app with nohup npm start' >> /home/ec2-user/app/deploy.log
 nohup npm start >> /home/ec2-user/app/app.log 2>&1 &
 
-echo 'start.sh completed' >> /home/ec2-user/app/deploy.log
+echo 'application_start.sh completed' >> /home/ec2-user/app/deploy.log
