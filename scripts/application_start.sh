@@ -1,11 +1,14 @@
 #!/bin/bash
 
 LOGFILE="/home/ec2-user/nodejs-aws-codedeploy-pipeline/deploy.log"
+APP_DIR="/home/ec2-user/nodejs-aws-codedeploy-pipeline"
+APP_FILE="app.js" # Replace with index.js or server.js if needed
+APP_NAME="nodejs-express-app"
 
 echo "🚀 Running application_start.sh..." >> $LOGFILE
 
-cd /home/ec2-user/nodejs-aws-codedeploy-pipeline || {
-  echo "❌ Failed to change directory" >> $LOGFILE
+cd $APP_DIR || {
+  echo "❌ Failed to change directory to $APP_DIR" >> $LOGFILE
   exit 1
 }
 
@@ -13,13 +16,17 @@ cd /home/ec2-user/nodejs-aws-codedeploy-pipeline || {
 if ! command -v pm2 &> /dev/null; then
   echo "📦 Installing pm2 globally..." >> $LOGFILE
   npm install -g pm2 >> $LOGFILE 2>&1
-else
-  echo "✅ pm2 already installed" >> $LOGFILE
 fi
 
-# Start the Node.js app
-echo "🚀 Starting app using pm2..." >> $LOGFILE
-pm2 start app.js --name node-app >> $LOGFILE 2>&1
+# Stop and delete old app if it exists
+if pm2 list | grep -q "$APP_NAME"; then
+  echo "🧹 Deleting existing PM2 app: $APP_NAME" >> $LOGFILE
+  pm2 delete $APP_NAME >> $LOGFILE 2>&1
+fi
 
-# Save pm2 process list (optional, good for reboot persistence)
+# Start the app
+echo "🚀 Starting $APP_FILE with pm2 --name $APP_NAME" >> $LOGFILE
+pm2 start $APP_FILE --name $APP_NAME >> $LOGFILE 2>&1
+
+# Save the process list
 pm2 save >> $LOGFILE 2>&1
