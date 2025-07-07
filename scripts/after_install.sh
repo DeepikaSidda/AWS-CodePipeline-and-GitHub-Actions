@@ -1,9 +1,8 @@
 #!/bin/bash
+echo 'run after_install.sh: ' >> /home/ec2-user/nodejs-aws-codedeploy-pipeline/deploy.log
 
-echo 'run after_install.sh: ' >> /home/ec2-user/app/deploy.log
+echo 'cd /home/ec2-user/nodejs-server-cicd' >> /home/ec2-user/nodejs-aws-codedeploy-pipeline/deploy.log
+cd /home/ec2-user/nodejs-aws-codedeploy-pipeline >> /home/ec2-user/nodejs-aws-codedeploy-pipeline/deploy.log
 
-echo 'cd /home/ec2-user/app' >> /home/ec2-user/app/deploy.log
-cd /home/ec2-user/app
-
-echo 'npm install' >> /home/ec2-user/app/deploy.log 
-npm install >> /home/ec2-user/app/deploy.log 2>&1
+echo 'npm install' >> /home/ec2-user/nodejs-aws-codedeploy-pipeline/deploy.log 
+npm install >> /home/ec2-user/nodejs-aws-codedeploy-pipeline/deploy.log
