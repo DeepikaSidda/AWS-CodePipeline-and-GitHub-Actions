@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo 'run start.sh: ' >> /home/ec2-user/app/deploy.log
+echo 'run application_start.sh: ' >> /home/ec2-user/app/deploy.log
 
 echo 'cd /home/ec2-user/app' >> /home/ec2-user/app/deploy.log
 cd /home/ec2-user/app
