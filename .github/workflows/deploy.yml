@@ -24,4 +24,4 @@ jobs:
           aws-region: us-east-1
 
       - name: Upload zip to S3
-        run: aws s3 cp app.zip s3://multi-region-artifacts-us-east-1/app.zip
+        run: aws s3 cp app.zip s3://multi-region-artifacts-store-us-east-1/app.zip
